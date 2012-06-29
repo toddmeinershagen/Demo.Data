@@ -1,0 +1,8 @@
+\\psf\home\documents\visual studio 2010\Projects\Demo.Cambian\Demo.Cambian\bin\Debug\Demo.Cambian.exe.config
+\\psf\home\documents\visual studio 2010\Projects\Demo.Cambian\Demo.Cambian\bin\Debug\Demo.Cambian.exe
+\\psf\home\documents\visual studio 2010\Projects\Demo.Cambian\Demo.Cambian\bin\Debug\Demo.Cambian.pdb
+\\psf\home\documents\visual studio 2010\Projects\Demo.Cambian\Demo.Cambian\obj\x86\Debug\Demo.Cambian.exe
+\\psf\home\documents\visual studio 2010\Projects\Demo.Cambian\Demo.Cambian\obj\x86\Debug\Demo.Cambian.pdb
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Cambian\Demo.Cambian\bin\Debug\EntityFramework.dll
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Cambian\Demo.Cambian\bin\Debug\FrameworkExtension.Core.dll
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Cambian\Demo.Cambian\bin\Debug\EntityFramework.xml
