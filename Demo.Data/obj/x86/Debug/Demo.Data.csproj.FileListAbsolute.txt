@@ -9,3 +9,12 @@
 \\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Cambian\Demo.Data\bin\Debug\Demo.Data.exe.config
 \\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Cambian\Demo.Data\obj\x86\Debug\Demo.Data.exe
 \\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Cambian\Demo.Data\obj\x86\Debug\Demo.Data.pdb
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\bin\Debug\Demo.Data.exe.config
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\obj\x86\Debug\Demo.Data.exe
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\obj\x86\Debug\Demo.Data.pdb
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\bin\Debug\Demo.Data.exe
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\bin\Debug\Demo.Data.pdb
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\bin\Debug\EntityFramework.dll
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\bin\Debug\FrameworkExtension.Core.dll
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\bin\Debug\EntityFramework.xml
+\\psf\Home\Documents\Visual Studio 2010\Projects\Demo.Data\Demo.Data\obj\x86\Debug\Demo.Data.csprojResolveAssemblyReference.cache

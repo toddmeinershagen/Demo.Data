@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Demo.Data.Entity
 {
@@ -33,6 +34,22 @@ namespace Demo.Data.Entity
                 {
                     Console.WriteLine("   " + student.FirstName + " " + student.LastName);
                 }
+            }
+
+            var studentCourses = from student in context.Students
+                                 from course in student.Courses
+                                 select
+                                     new
+                                         {
+                                             FullStudentName = student.LastName + ", " + student.FirstName,
+                                             CourseName = course.Name
+                                         };
+
+            Console.WriteLine();
+
+            foreach (var studentCourse in studentCourses)
+            {
+                Console.WriteLine(studentCourse.FullStudentName + " - " + studentCourse.CourseName);
             }
 
             Console.ReadLine();
