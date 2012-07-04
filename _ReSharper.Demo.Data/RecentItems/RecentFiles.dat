@@ -1,4 +1,30 @@
 ﻿<RecentFiles>
-  <RecentFiles />
-  <RecentEdits />
+  <RecentFiles>
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityContext.cs" caret="669" fromTop="19" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oak/f:Massive.cs" caret="8819" fromTop="12" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Students.cs" caret="0" fromTop="0" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oak/f:DynamicModels.cs" caret="5111" fromTop="12" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oak/f:Association.cs" caret="1216" fromTop="10" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Course.cs" caret="0" fromTop="0" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Student.cs" caret="372" fromTop="7" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:OakleyClient.cs" caret="1125" fromTop="7" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityClient.cs" caret="1343" fromTop="6" />
+  </RecentFiles>
+  <RecentEdits>
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityClient.cs" caret="1985" fromTop="18" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityContext.cs" caret="669" fromTop="13" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Course.cs" caret="475" fromTop="18" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Course.cs" caret="217" fromTop="8" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Student.cs" caret="414" fromTop="8" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:OakleyClient.cs" caret="281" fromTop="12" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:OakleyClient.cs" caret="1501" fromTop="15" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Student.cs" caret="653" fromTop="23" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:Student.cs" caret="372" fromTop="13" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:OakleyClient.cs" caret="1426" fromTop="15" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityClient.cs" caret="1384" fromTop="7" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityClient.cs" caret="1853" fromTop="17" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityClient.cs" caret="1246" fromTop="5" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Entity/f:EntityClient.cs" caret="1694" fromTop="12" />
+    <File id="12FB42E6-2CFA-4D50-B098-37EEE82FAD60/d:Oakley/f:OakleyClient.cs" caret="1242" fromTop="10" />
+  </RecentEdits>
 </RecentFiles>

@@ -1,12 +1,20 @@
 using System.Collections.Generic;
+using Massive;
 using Oak;
 
 namespace Demo.Data.Oakley
 {
+    public class CoursesStudents : DynamicRepository
+    {
+        
+    }
+
+
     public class Student : DynamicModel
     {
-        Courses _coursesRepository = new Courses();
-        StudentsCourses _studentsCoursesRepository = new StudentsCourses();
+        private readonly CoursesStudents _coursesStudents = new CoursesStudents();
+        readonly Courses _courses = new Courses();
+        //readonly Students _students = new Students();
 
         public Student(object dto)
             : base(dto)
@@ -16,7 +24,7 @@ namespace Demo.Data.Oakley
 
         IEnumerable<dynamic> Associates()
         {
-            yield return new HasManyThrough(repository: _coursesRepository, through: _studentsCoursesRepository);
+            yield return new HasManyThrough(repository: _courses, through: _coursesStudents);
         }
     }
 }

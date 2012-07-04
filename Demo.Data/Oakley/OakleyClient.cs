@@ -10,7 +10,7 @@ namespace Demo.Data.Oakley
             Console.WriteLine("");
 
             var studentsRepo = new Students();
-            var students = studentsRepo.All();
+            dynamic students = studentsRepo.All();
 
             foreach (var student in students)
             {
@@ -37,22 +37,13 @@ namespace Demo.Data.Oakley
                 }
             }
 
-            //Gemini.Initialized<DynamicModel>((d) => Console.WriteLine("Hello:  " + d.ToString()));
+            dynamic newStudents = studentsRepo.All();
+            var coursesForStudent = newStudents.Courses();
 
-            //foreach (var student in students)
-            //{
-            //    Console.WriteLine(student.ToString());
-
-            //    foreach (var courseName in student.Courses().Select("Name"))
-            //    {
-            //        Console.WriteLine(courseName);
-            //    }
-
-            //    foreach (var course in student.Courses())
-            //    {
-            //        Console.WriteLine(course.ToString());
-            //    }
-            //}
+            foreach (var course in coursesForStudent)
+            {
+                Console.WriteLine(string.Format("{0}, {1} - {2}", course.Student().FirstName, course.Student().LastName, course.Name));
+            }
 
             Console.ReadLine();
         }

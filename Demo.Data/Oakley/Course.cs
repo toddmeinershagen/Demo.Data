@@ -5,8 +5,8 @@ namespace Demo.Data.Oakley
 {
     public class Course : DynamicModel
     {
-        Students _studentsRepository = new Students();
-        StudentsCourses _studentsCoursesRepository = new StudentsCourses();
+        readonly Students _students = new Students();
+        private readonly Courses _courses = new Courses();
 
         public Course(object dto)
             : base(dto)
@@ -16,7 +16,7 @@ namespace Demo.Data.Oakley
 
         IEnumerable<dynamic> Associates()
         {
-            yield return new HasManyThrough(repository: _studentsRepository, through: _studentsCoursesRepository);
+            yield return new HasManyAndBelongsTo(repository: _students, reference: _courses);
         }
     }
 }

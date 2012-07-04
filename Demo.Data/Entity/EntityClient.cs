@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
+using Oak;
 
 namespace Demo.Data.Entity
 {
@@ -45,6 +47,8 @@ namespace Demo.Data.Entity
                                              CourseName = course.Name
                                          };
 
+            var castStudentCourses = studentCourses.Select(x => new Gemini(x) as dynamic);
+            
             Console.WriteLine();
 
             foreach (var studentCourse in studentCourses)

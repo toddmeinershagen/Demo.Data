@@ -17,7 +17,7 @@ namespace Demo.Data.Entity
                          {
                              x.MapLeftKey("CourseId");
                              x.MapRightKey("StudentId");
-                             x.ToTable("StudentsCourses");
+                             x.ToTable("CoursesStudents");
                          });
 
         }

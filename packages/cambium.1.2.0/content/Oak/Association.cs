@@ -90,9 +90,48 @@ namespace Oak
             return options.discardCache;
         }
 
+        public string InnerJoinSelectClause(string fromColumn, string toTable, string throughTable, string foreignKey, params dynamic[] models)
+        {
+            return @"
+            select {toTable}.*, {throughTable}.{fromColumn}
+            from {throughTable}
+            inner join {toTable}
+            on {throughTable}.{using} = {toTable}.Id
+            where {throughTable}.{fromColumn} in ({inClause})"
+                .Replace("{fromColumn}", fromColumn)
+                .Replace("{toTable}", toTable)
+                .Replace("{throughTable}", throughTable)
+                .Replace("{using}", foreignKey)
+                .Replace("{inClause}", InClause(models));
+        }
+
+        public void AddReferenceBackToModel(dynamic association, dynamic model)
+        {
+            association.SetMember(model.GetType().Name, ModelReference);
+        }
+
+        public DynamicFunction ModelReference { get; set; }
+
         public string InClause(IEnumerable<dynamic> models)
         {
             return string.Join(",", models.Select(s => string.Format("'{0}'", s.GetMember(Id()))));
+        }
+
+        public virtual void AddNewAssociationMethod(DynamicModels collection, dynamic model)
+        {
+            collection.SetMember(
+                "New",
+                new DynamicFunctionWithParam(attributes =>
+                {
+                    return EntityFor(attributes);
+                }));
+        }
+
+        public dynamic EntityFor(dynamic attributes)
+        {
+            var entity = new Gemini(attributes);
+
+            return Repository.Projection(entity);
         }
     }
 
@@ -133,7 +172,7 @@ namespace Oak
             model.SetMember(Singular(Named) + "Ids", QueryIds(fromColumn, model));
         }
 
-        private void AddNewAssociationMethod(DynamicModels collection, dynamic model)
+        public override void AddNewAssociationMethod(DynamicModels collection, dynamic model)
         {
             collection.SetMember(
                 "New",
@@ -256,20 +295,22 @@ namespace Oak
             resolvedForeignKey = ForeignKey ?? ForeignKeyFor(Repository);
 
             AddAssociationMethod(model);
+
+            ModelReference = new DynamicFunction(() => model);
         }
 
         private void AddAssociationMethod(dynamic model)
         {
             model.SetMember(
                 Named,
-                Query(model));
+                InnerJoinFor(model));
 
             model.SetMember(
                 Singular(Named) + "Ids",
                 QueryIds(model));
         }
 
-        private DynamicFunctionWithParam Query(dynamic model)
+        private DynamicFunctionWithParam InnerJoinFor(dynamic model)
         {
             return (options) =>
             {
@@ -277,7 +318,11 @@ namespace Oak
 
                 if (cachedCollection != null) return cachedCollection;
 
-                cachedCollection = new DynamicModels(Repository.Query(SelectClause(model)));
+                var models = (Repository.Query(InnerJoinSelectClause(fromColumn, toTable, throughTable, resolvedForeignKey, model)) as IEnumerable<dynamic>).ToList();
+
+                foreach (var m in models) AddReferenceBackToModel(m, model);
+
+                cachedCollection = new DynamicModels(models);
 
                 AddNewAssociationMethod(cachedCollection, model);
 
@@ -291,7 +336,7 @@ namespace Oak
 
             if (selectManyRelatedToCache != null) return selectManyRelatedToCache;
 
-            var many = Repository.Query(SelectClause(models.ToArray())).ToList();
+            var many = Repository.Query(InnerJoinSelectClause(fromColumn, toTable, throughTable, resolvedForeignKey, models.ToArray())).ToList();
 
             foreach (var item in many)
             {
@@ -305,45 +350,105 @@ namespace Oak
             return selectManyRelatedToCache;
         }
 
-        private string SelectClause(params dynamic[] models)
+        private DynamicFunction QueryIds(dynamic model)
         {
-            return @"
-            select {toTable}.*, {throughTable}.{fromColumn}
-            from {throughTable}
-            inner join {toTable}
-            on {throughTable}.{using} = {toTable}.Id
-            where {throughTable}.{fromColumn} in ({inClause})"
-                .Replace("{fromColumn}", fromColumn)
-                .Replace("{toTable}", toTable)
-                .Replace("{throughTable}", throughTable)
-                .Replace("{using}", resolvedForeignKey)
-                .Replace("{inClause}", InClause(models));
+            return () =>
+            {
+                IEnumerable<dynamic> models = (InnerJoinFor(model) as DynamicFunctionWithParam).Invoke(null);
+
+                return models.Select(s => s.Id).ToList();
+            };
+        }
+    }
+
+    public class HasManyAndBelongsTo : Association
+    {
+        dynamic cachedCollection;
+
+        string throughTable;
+
+        string fromColumn;
+
+        DynamicRepository reference;
+
+        string resolvedForeignKey;
+
+        string toTable;
+
+        public string CrossRefenceTable { get; set; }
+
+        public string ForeignKey { get; set; }
+
+        public string FromColumn { get; set; }
+
+        public HasManyAndBelongsTo(DynamicRepository repository, DynamicRepository reference)
+        {
+            Repository = repository;
+
+            this.reference = reference;
+
+            var sorted = new[] { repository.TableName, reference.TableName }.OrderBy(s => s);
+
+            throughTable = sorted.First() + sorted.Last();
+
+            Named = repository.GetType().Name;
         }
 
-        private void AddNewAssociationMethod(DynamicModels collection, dynamic model)
+        public void Init(dynamic model)
         {
-            collection.SetMember(
-                "New",
-                new DynamicFunctionWithParam(attributes =>
-                {
-                    return EntityFor(attributes);
-                }));
+            throughTable = CrossRefenceTable ?? throughTable;
+
+            fromColumn = FromColumn ?? ForeignKeyFor(model);
+
+            toTable = Repository.TableName;
+
+            resolvedForeignKey = ForeignKey ?? ForeignKeyFor(Repository);
+
+            AddAssociationMethods(model);
+
+            ModelReference = new DynamicFunction(() => model);
         }
 
-        private dynamic EntityFor(dynamic attributes)
+        public void AddAssociationMethods(dynamic model)
         {
-            var entity = new Gemini(attributes);
+            model.SetMember(
+                Named,
+                InnerJoinFor(model));
 
-            return Repository.Projection(entity);
+            model.SetMember(
+                Singular(Named) + "Ids",
+                QueryIds(model));
         }
 
         private DynamicFunction QueryIds(dynamic model)
         {
             return () =>
             {
-                IEnumerable<dynamic> models = (Query(model) as DynamicFunctionWithParam).Invoke(null);
+                IEnumerable<dynamic> models = (InnerJoinFor(model) as DynamicFunctionWithParam).Invoke(null);
 
                 return models.Select(s => s.Id).ToList();
+            };
+        }
+
+        private DynamicFunctionWithParam InnerJoinFor(dynamic model)
+        {
+            return (options) =>
+            {
+                if (DiscardCache(options)) cachedCollection = null;
+
+                if (cachedCollection != null) return cachedCollection;
+
+                string innerJoinSelectClause = InnerJoinSelectClause(fromColumn, toTable, throughTable, resolvedForeignKey, model);
+
+                var models = (Repository.Query(innerJoinSelectClause) as IEnumerable<dynamic>).ToList();
+
+                foreach (var m in models) AddReferenceBackToModel(m, model);
+
+                cachedCollection = new DynamicModels(models);
+
+                AddNewAssociationMethod(cachedCollection, model);
+
+                return cachedCollection;
             };
         }
     }
