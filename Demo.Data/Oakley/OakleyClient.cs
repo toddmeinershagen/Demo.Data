@@ -42,7 +42,7 @@ namespace Demo.Data.Oakley
 
             foreach (var course in coursesForStudent)
             {
-                Console.WriteLine(string.Format("{0}, {1} - {2}", course.Student().FirstName, course.Student().LastName, course.Name));
+                Console.WriteLine(string.Format("{0}, {1} - {2}", course.Student.FirstName, course.Student.LastName, course.Name));
             }
 
             Console.ReadLine();
