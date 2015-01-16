@@ -1,0 +1,9 @@
+{
+  "name": "Demo-Data",
+  "twitter": [
+    "tmeinershagen",
+    //""
+  ],
+  //"google_analytics": "UA-5201171-14",
+  "travis": false
+}
