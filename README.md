@@ -3,10 +3,11 @@ Demo.Data
 
 Comparison of Entity Framework and Oak
 
-Test
-======
+# Test
 This is a test section.
 
-Test2
-======
+# Test2
 This is another test section.
+
+## Sub-Test2
+This is a sub-section of Test2.
